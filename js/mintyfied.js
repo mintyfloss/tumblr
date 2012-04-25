@@ -223,7 +223,11 @@
 		el: $('.loadMore'),
 		
 		initialize: function() {
+			_.bindAll(this, 'loadMore');
+
 			var view = this;
+
+			view.$loadLink = view.$el.find('.load');
 
 			view.model = new LoadMore({
 				page: view.$el.attr('data-page'),
@@ -231,8 +235,12 @@
 			});
 
 			view.model.on('change:page', function() {
+				// Update "Load more posts" link to point to next page
+				view.$loadLink.attr('href', '/page/' + (parseInt(view.model.get('page')) + 1));
+
+				// Hide "Lost more posts" link on last page
 				if (this.get('page') == this.get('totalPages'))
-					view.$el.find('.load').hide();
+					view.$loadLink.hide();
 			});
 		},
 
@@ -240,6 +248,7 @@
 			'click .load': function() {
 				var $loadLink = this.$el.find('.load');
 
+				$loadLink.addClass('loading');
 				this.loadMore(function() {
 					$loadLink.removeClass('loading');
 				});
@@ -255,8 +264,8 @@
 			;
 
 			$.ajax({
-				url:'/page/' + nextPage,
-				success:function(data) {
+				url: '/page/' + nextPage,
+				success: function(data) {
 					var $newPosts = $(data).find('.posts .post');
 					postsView.addPosts($newPosts, true);
 					postsView.render($newPosts, true, function() {
@@ -268,6 +277,9 @@
 
 						if (callback) callback();
 					});
+				},
+				error: function() {
+					location.href = '/page/' + nextPage;
 				}
 			});			
 		}

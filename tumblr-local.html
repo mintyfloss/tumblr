@@ -181,7 +181,9 @@
 					</ul>
 				</div>
 				<div class="loadMore" data-total-pages="{TotalPages}" data-page="{CurrentPage}">
-					<a class="load" href="javascript://">{lang:Load more posts}</a>
+					{block:NextPage}
+					<a class="load" href="{NextPage}">{lang:Load more posts}</a>
+					{/block:NextPage}
 				</div>
 				{/block:Pagination}
 			</section><!--close content-->
