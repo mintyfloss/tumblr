@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="{block:English}en{/block:English}{block:French}fr{/block:French}{block:German}de{/block:German}{block:Japanese}ja{/block:Japanese}{block:Italian}it{/block:Italian}{block:Spanish}es{/block:Spanish}{block:Polish}pl{/block:Polish}">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>{Title}{block:PostSummary} &mdash; {PostSummary}{/block:PostSummary}</title>
+	{block:Description}<meta name="description" content="{MetaDescription}">{/block:Description}
+	<link rel="apple-touch-icon" href="{PortraitURL-128}">
+	<link rel="shortcut icon" href="http://www.mintyfloss.com/tumblr/images/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" href="{RSS}">		
+	<!--Normalize CSS-->
+	<link rel="stylesheet" href="http://static.tumblr.com/cqczc5x/4n1m0ybpr/normalize.css" type="text/css" media="all">
+	<link rel="stylesheet" href="http://localhost/~admin/tumblr/bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="http://localhost/~admin/tumblr/bootstrap/css/bootstrap-responsive.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="http://localhost/~admin/tumblr/css/tumblr.css" type="text/css" media="all">
+	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="headerContent span2">
+				<header id="header">
+					<h1 id="logo"><a class="logoLink" href="/">{Title}</a></h1>
+					{block:Description}<div class="description">{Description}</div>{/block:Description}
+					<ul id="nav" class="nav nav-pills nav-stacked">
+						{block:HasPages}{block:Pages}<li><a href="{URL}">{Label}</a></li>{/block:Pages}{/block:HasPages}
+						<li><a href="/archive">{lang:Archive}</a></li>
+						<li><a href="/rss">{lang:RSS feed}</a></li>
+						<li>
+							<a class="aboutMeLink" data-toggle="collapse" data-target="#aboutMeDesc" href="javascript://">{lang:About me}</a>
+							<div id="aboutMeDesc" class="collapse">
+								<h5>Mintyfied</h5>
+								<p>Some crap about this site</p>
+							</div>
+						</li>
+
+						{block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
+					</ul>
+					<form id="search" class="form-search" action="/search" method="get">
+						<input type="text" class="search-query" placeholder="{lang:Search}" name="q" value="{SearchQuery}" />
+					</form>		
+				</header>
+			</div>
+			<section id="content" class="span10">
+
+				{block:SearchPage}<p>{lang:Found SearchResultCount results for SearchQuery 2}</p>
+				{block:NoSearchResults}<p>{lang:No results for SearchQuery 2}</p>{/block:NoSearchResults}{/block:SearchPage}
+				
+				<div id="posts" class="clearfix">
+				{block:Posts}
+				<div class="post">
+					<article class="{TagsAsClasses}">
+						{block:Date}
+						{block:NewDayDate}<h6 class="date">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</h6>{/block:NewDayDate}
+						{block:SameDayDate}<h6 class="date">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</h6>{/block:SameDayDate}
+						{/block:Date}
+						{block:Text}
+						<div class="postContent text">
+							{block:Title}<h3>{Title}</h3>{/block:Title}
+							{Body}
+						</div>
+						{/block:Text}
+						{block:Quote}
+						<div class="postContent quote">
+							<blockquote class="words {Length}">
+								<p>{Quote}</p>
+								{block:Source}<small><cite>{Source}</cite></small>{/block:Source}
+							</blockquote>
+						</div>
+						{/block:Quote}
+						{block:Link}
+						<div class="postContent link">
+							<h3><a href="{URL}" {Target}>{Name}</a></h3>
+							{block:Description}<div class="caption">{Description}</div>{/block:Description}
+						</div>
+						{/block:Link}
+						{block:Video}
+						<div class="postContent video">
+							{Video-500}
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+						</div>
+						{/block:Video}
+						{block:Audio}
+						<div class="postContent audio">
+							<div class="audioWrapper">
+								{block:AlbumArt}<img src="{AlbumArtURL}" alt="">{/block:AlbumArt}							
+								<div class="audioDesc">
+									{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+									<div class="audioInfo">
+										{block:TrackName}<div class="trackName"><h5>{TrackName}</h5></div>{/block:TrackName}
+										{block:Artist}<div class="artist">{Artist}</div>{/block:Artist}
+										{block:Album}<div class="album"><em>{Album}</em></div>{/block:Album}
+									</div>
+								</div>
+							</div>
+							{AudioPlayerWhite}
+						</div>
+						{/block:Audio}
+						{block:Photo}
+						<div class="postContent photo">
+							<figure>
+								<a class="modalLink" data-toggle="modal" data-postid="{PostID}" data-postnotesurl="{PostNotesURL}" href="{LinkURL}">
+									<i class="zoomInIcon icon-zoom-in icon-white"></i>
+									<img src="{PhotoURL-250}" alt="{PhotoAlt}"/>
+								</a>
+								{block:Caption}<figcaption class="caption">{Caption}</figcaption>{/block:Caption}
+							</figure>
+						</div>
+						{/block:Photo}
+						{block:Photoset}
+						<div class="postContent photoset">
+							{block:Photos}
+							<figure>
+								<img src="{PhotoURL-250}" alt="{PhotoAlt}"/>
+								{block:Caption}<figcaption class="caption">{Caption}</figcaption>{/block:Caption}
+							</figure>
+							{/block:Photos}
+							{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+						</div>
+						{/block:Photoset}
+						{block:Chat}
+						<div class="postContent chat">
+							{block:Title}<h3>{Title}</h3>{/block:Title}
+							<ul class="conversation">
+								{block:Lines}
+								<li class="line {Alt}">
+									{block:Label}<span class="person">{Label}</span>{/block:Label}
+									<span class="person-said">{Line}</span>
+								</li>
+								{/block:Lines}
+							</ul>
+						</div>
+						{/block:Chat}
+						{block:Answer}
+						<div class="postContent answer">
+							<img src="{AskerPortraitURL-40}">
+							{Asker}
+							{Question}
+							{Answer}
+						</div>
+						{/block:Answer}
+						{block:IndexPage}
+						<div class="indexPage">
+							<a class="permalink" href="{Permalink}">{lang:Permalink}</a>
+							<a class="noteCount" data-toggle="modal" data-postid="{PostID}" data-postnotesurl="{PostNotesURL}" href="{Permalink}">
+								<i class="icon icon-heart"></i>{NoteCountWithLabel}
+							</a>
+						</div>
+						{/block:IndexPage}
+					</article>
+				</div>
+				{/block:Posts}
+				</div><!--close posts-->
+				
+				{block:PermalinkPagination}
+				<div class="pagination">
+					<ul>
+					{block:PreviousPost}<li><a class="prev"href="{PreviousPost}">{lang:Previous post}</a></li>{/block:PreviousPost}
+					{block:NextPost}<li><a class="next" href="{NextPost}">{lang:Next post}</a></li>{/block:NextPost}
+					</ul>
+				</div>
+				{/block:PermalinkPagination}
+
+				{block:Pagination}
+				<div class="pagination">
+					<ul>
+					{block:PreviousPage}<li><a class="prev" href="{PreviousPage}">{lang:Previous}</a></li>{/block:PreviousPage}
+
+					{block:JumpPagination length="5"}
+						{block:CurrentPage}<li class="active"><a href="javascript://">{PageNumber}</a></li>{/block:CurrentPage}
+						{block:JumpPage}<li><a href="{URL}">{PageNumber}</a></li>{/block:JumpPage}
+					{/block:JumpPagination}
+
+					{block:NextPage}<li><a class="next" href="{NextPage}">{lang:Next}</a></li>{/block:NextPage}
+					</ul>
+				</div>
+				{/block:Pagination}
+			</section><!--close content-->
+		</div><!--close row-fluid-->
+	</div><!--close container-fluid-->
+	<div class="modalScroll">
+		<div class="modal" id="postModal">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3></h3>
+			</div>
+			<div class="modal-body">
+				<div class="modalPost">
+					<div class="modalPostMain"></div>
+					<div class="modalPostInfo"></div>
+					<div class="modalPostSource"></div>
+				</div>
+				<div class="modalPostNotes"></div>
+			</div>
+			<div class="modal-footer">
+				<a href="#" data-dismiss="modal" class="btn">Close</a>
+			</div>
+		</div>
+	</div>
+	<footer id="footer"></footer>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://localhost/~admin/tumblr/js/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="http://localhost/~admin/tumblr/js/jquery.imagesloaded.min.js"></script>
+	<script type="text/javascript" src="http://localhost/~admin/tumblr/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://localhost/~admin/tumblr/js/mintyfied.js"></script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-4417465-3']);
+		_gaq.push(['_trackPageview']);
+	
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>	
+</body>
+</html>

@@ -1,0 +1,328 @@
+/*Tumblr inherited */
+.search_query {}
+.read_more_container a {}
+iframe#tumblr_controls {}
+
+/***************
+	Header
+****************/
+	.nav li:first-child {
+		border-top:1px dotted #999;
+	}
+	.nav li {
+		border-bottom:1px dotted #999;
+	}
+	.nav a {
+		color:#555;	
+	}
+	.logoLink {
+		width:80px;
+		height:80px;
+		margin:40px auto 20px auto;
+		display:block;
+		text-indent:-5000px;
+		overflow:hidden;
+		background:url('../images/mintyfied_logo.png') 0 0 no-repeat transparent;
+	}
+	.search-query {
+		width:85%;
+		max-width:150px;
+	}
+
+/***************
+	Main Content
+****************/
+	#content {
+		max-width:840px;
+		padding:25px 0 0 0;
+	}
+	a,
+	a:hover {
+		color:#333;
+		text-decoration:none;
+	}
+	#likeHack {
+		display:none;
+	}
+
+/***************
+	Modal
+****************/
+	body.modal-open {
+		overflow:hidden;
+	}
+
+	.modalScroll {
+		position:fixed;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		overflow-y:scroll;
+		display:none;
+		background-color:rgba(0, 0, 0, 0.80);
+		z-index:102;
+	}
+		.modal {
+			position:relative;
+			top:0;
+			left:0;
+			margin:25px auto;
+			width:700px;
+			display:none;
+			-webkit-border-radius:0;
+			-moz-border-radius:0;
+			border-radius:0;
+		}
+			.modal-footer {
+				display: none;
+			}
+			.modal-body {
+				max-height:none;
+				padding:0;
+				text-align:center;
+			}
+				.modal-body a {
+					color:#333;
+					border-bottom:1px dotted #aaa;
+					text-decoration:none;
+				}
+					.modal-body a:hover {
+						border-bottom:1px dotted #333;
+					}
+			.modalPost {
+				margin-top:20px;
+				min-width:250px;
+				display:inline-block;
+				text-align:left;
+			}
+				.modalPost figcaption,
+				.modalPost .audioDesc {
+					margin-top:5px;
+				}
+			.modalPostNotes {
+				margin:15px 0;
+				max-height:190px;
+				overflow-x:hidden;
+				overflow-y:auto;
+				padding:15px;
+				text-align:left;
+			}
+				.modal .modal-body .modalPostNotes .more_notes_link_container {
+					list-style:none;
+				}
+
+	.modal-body ::-webkit-scrollbar {
+		width:5px;
+		height:5px;
+	}
+
+	.modal-body ::-webkit-scrollbar-track-piece {
+		background-color:#ccc;
+		opacity:.5;
+	}
+	.modal-body ::-webkit-scrollbar-thumb {
+		background-color:#999;
+	}
+
+/****************************
+ Pagination
+*****************************/
+	.pagination {
+		display: none;
+	}
+	.loadMore {
+		text-align:center;
+		margin:40px 0 150px;
+	}
+	.load {
+		display:inline-block;
+		padding:10px 15px;
+		background-color:#222;
+		color:#fff;
+	}
+		.load:hover {
+			cursor:pointer;
+			color:#999;
+		}
+/****************************
+ The Post (permalink page)
+*****************************/
+	.post {
+		width:500px;
+		margin-bottom:20px;
+	}
+	.post img {
+		max-width:500px;
+	}
+	.post .date {
+		margin-bottom:4px;
+	}
+
+/****************************
+ The Post (index page)
+*****************************/
+
+	.posts .post {
+		width:250px;
+		margin-bottom:20px;
+	}
+
+	.posts .post img {
+		max-width:250px;
+	}
+
+	.posts .post .date {
+		position:relative;
+		top:9px;
+		opacity:0;
+		margin-bottom:4px;
+		transition: all .3s ease-in-out;
+/*		-moz-transition: all .3s ease-in-out;
+		-webkit-transition: all .3s ease-in-out;
+		-webkit-backface-visibility: hidden;*/
+	}
+		.posts .post:hover .date {
+			opacity:1;
+			top:0;
+/*			transition: opacity .4s ease-in-out;
+			-moz-transition: opacity .4s ease-in-out;
+			-webkit-transition: opacity .4s ease-in-out;*/
+		}
+
+	/*** Icons ***/
+		.posts .post .icons {
+			background-color:#f5f5f5;
+			padding:5px 10px;
+			border-top:1px solid #f0f0f0;
+		}
+		.posts .post .icons a {
+			color:#bbb;
+		}
+		.posts .permalink {
+			margin-right:9px;
+		}
+		.posts .post i.icon {
+			padding-right:3px;
+		}
+
+	/*** Audio Posts ***/
+		.posts .audio_player {
+			height:27px;
+			background-color:#fff;
+		}
+
+	/*** Photo Posts ***/
+		.posts .zoomInIcon {
+			position:absolute;
+			top:4px;
+			right:4px;
+			display:block;
+			background-color:#111;
+			border:2px solid #111;
+			border-radius:2px;
+			-moz-border-radius:2px;
+			-webkit-border-radius:2px;
+			opacity:0.4;
+		}
+			.posts .post:hover .zoomInIcon {
+				opacity:.7;
+			}
+	
+		figure a {
+			color:#333;
+			border-bottom:1px dotted #777;
+			text-decoration:none;
+		}
+			figure a:hover {
+				color:#333;
+				border-bottom:1px dotted #333;
+				text-decoration:none;
+			}
+
+	/*** Canvas Overlay ***/
+		.posts .audioWrapper,
+		.posts figure {
+			position:relative;
+		}	
+
+		.posts .audioDesc,
+		.posts figcaption {
+			position:absolute!important;
+			bottom:0;
+			left:-10px;
+			margin-left:10px;
+			width:250px;
+			opacity:1;
+		}
+		.post .audioInfo {
+			padding-bottom:5px;
+		}
+		.post .canvasForeground {
+			left:-10px;
+			padding:5px 10px 0 10px;
+			opacity:0;
+			color:#222;
+		}
+			.post:hover .canvasForeground {
+/*				-webkit-backface-visibility: hidden;
+				transition:opacity .3s ease-in-out;
+				-moz-transition:opacity .3s ease-in-out;
+				-webkit-transition:opacity .3s ease-in-out;*/
+				transition:opacity .3s ease-in-out, left .3s ease-in-out;
+				-moz-transition:opacity .3s ease-in-out, left .3s ease-in-out;
+				-webkit-transition:opacity .3s ease-in-out, left .3s ease-in-out;
+				left:0;
+				opacity:1;		
+			}
+		.post .canvasBackground {
+			display:none;
+		}
+			.post:hover .canvasBackground {
+				display:block;
+			}
+
+/*		.posts .audioWrapper,
+		.posts figure {
+			position:relative;
+		}
+
+		.posts .audioDesc,
+		.posts figcaption {
+			position:absolute!important;
+			bottom:0;
+			left:-10px;
+			margin-left:10px;
+			width:250px;
+			z-index:101;
+			opacity:0;
+		}
+			.posts .post:hover .audioDesc,
+			.posts .post:hover figcaption {
+				-webkit-backface-visibility: hidden;
+				transition: all .3s ease-in-out;
+				-moz-transition: all .3s ease-in-out;
+				-webkit-transition: all .3s ease-in-out;			
+				left:0;
+				opacity:1;
+			}
+			.posts figcaption blockquote {
+				border-left-color:#78A81A;
+			}
+
+			.posts .audioInfo {
+				margin-bottom:9px;
+			}*/
+
+/*	.posts .captionOverlay	{
+		position:absolute;
+		bottom:0;
+		left:0;
+		z-index:100;
+		opacity:1;
+	}
+		.posts .post:hover .postContent .captionOverlay {
+			bottom:4px;
+			opacity:1;
+			clip:auto!important;
+		}*/
