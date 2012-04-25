@@ -142,9 +142,14 @@ iframe#tumblr_controls {}
 		color:#fff;
 	}
 		.load:hover {
-			cursor:pointer;
 			color:#999;
 		}
+	.loading {
+		width:10px;
+		overflow:hidden;
+		text-indent:-5000px;
+		background:url('../images/spinner.gif') center center no-repeat #fff;
+	}
 /****************************
  The Post (permalink page)
 *****************************/

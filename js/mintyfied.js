@@ -234,13 +234,16 @@
 				if (this.get('page') == this.get('totalPages'))
 					view.$el.find('.load').hide();
 			});
-
-			this.$el.find('.load').canvasBackground();
 		},
 
 		events: {
-			'click .load': function() { 
-				this.loadMore();
+			'click .load': function() {
+				var $loadLink = this.$el.find('.load');
+
+				this.loadMore(function() {
+					$loadLink.removeClass('loading');
+				});
+
 				return false;
 			}
 		},
