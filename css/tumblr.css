@@ -13,6 +13,7 @@ iframe#tumblr_controls {}
 		border-bottom:1px dotted #999;
 	}
 	.nav a {
+		padding:8px 12px;
 		color:#555;	
 	}
 	.logoLink {
@@ -24,10 +25,36 @@ iframe#tumblr_controls {}
 		overflow:hidden;
 		background:url('../images/mintyfied_logo.png') 0 0 no-repeat transparent;
 	}
-	.search-query {
-		width:85%;
-		max-width:150px;
+	/* About me collapse widget */
+		.aboutMeLink {
+			position:relative;
+		}
+		.aboutMeLink i.icon {
+			position:absolute;
+			top:9px;
+			right:18px;
+			opacity:0.2;
+		}
+			.aboutMeLink:hover i.icon {
+				display:inline-block;
+				opacity:0.7;
+				transition: opacity .3s ease-in-out;
+				-moz-transition: opacity .3s ease-in-out;
+				-webkit-transition: opacity .3s ease-in-out;
+			}
+		.aboutMeDesc {
+			padding:0 12px;
+		}
+			.aboutMeDesc h5{
+				margin-top:9px;
+			}
+	#search {
+		display:none;
 	}
+		.search-query {
+			width:85%;
+			max-width:150px;
+		}
 
 /***************
 	Main Content
@@ -150,6 +177,7 @@ iframe#tumblr_controls {}
 		text-indent:-5000px;
 		background:url('../images/spinner.gif') center center no-repeat #fff;
 	}
+
 /****************************
  The Post (permalink page)
 *****************************/
@@ -167,7 +195,6 @@ iframe#tumblr_controls {}
 /****************************
  The Post (index page)
 *****************************/
-
 	.posts .post {
 		width:250px;
 		margin-bottom:20px;
@@ -202,7 +229,7 @@ iframe#tumblr_controls {}
 			border-top:1px solid #f0f0f0;
 		}
 		.posts .post .icons a {
-			color:#bbb;
+			color:#aaa;
 		}
 		.posts .permalink {
 			margin-right:9px;

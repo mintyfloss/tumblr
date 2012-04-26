@@ -22,19 +22,18 @@
 				<header id="header">
 					<h1 id="logo"><a class="logoLink" href="/">{Title}</a></h1>
 					{block:Description}<div class="description">{Description}</div>{/block:Description}
-					<ul id="nav" class="nav nav-pills nav-stacked">
+					<ul id="nav" class="nav nav-stacked">
 						{block:HasPages}{block:Pages}<li><a href="{URL}">{Label}</a></li>{/block:Pages}{/block:HasPages}
-						<li><a href="/archive">{lang:Archive}</a></li>
-						<li><a href="/rss">{lang:RSS feed}</a></li>
-						<li>
-							<a class="aboutMeLink" data-toggle="collapse" data-target="#aboutMeDesc" href="javascript://">{lang:About me}</a>
-							<div id="aboutMeDesc" class="collapse">
+						<li class="archive"><a href="/archive">{lang:Archive}</a></li>
+						<li class="rss"><a href="/rss">{lang:RSS feed}</a></li>
+						{block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
+						<li class="aboutMe">
+							<a class="aboutMeLink" data-toggle="collapse" data-target=".aboutMeDesc" href="javascript://">{lang:About me}<i class="icon icon-chevron-down"></i></a>
+							<div class="aboutMeDesc collapse">
 								<h5>Mintyfied</h5>
-								<p>Still working on this theme. Almost done!</p>
+								<p>I created this to play around with making a Tumblr theme. I also post stuff that I find interesting.</p>
 							</div>
 						</li>
-
-						{block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
 					</ul>
 					<form id="search" class="form-search" action="/search" method="get">
 						<input type="text" class="search-query" placeholder="{lang:Search}" name="q" value="{SearchQuery}" />

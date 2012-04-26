@@ -285,7 +285,27 @@
 		}
 	});
 
+	var HeaderView = Backbone.View.extend({
+		el: $('#header'),
+
+		initialize: function(){
+			var view = this;
+
+			view.$el.find('.aboutMeDesc')
+				.collapse({toggle: false})
+				.on('hide', function() {
+					view.$el.find('.icon').removeClass('icon-chevron-up');
+					view.$el.find('.icon').addClass('icon-chevron-down');
+				})
+				.on('show', function() {
+					view.$el.find('.icon').removeClass('icon-chevron-down');
+					view.$el.find('.icon').addClass('icon-chevron-up');
+				});
+		}
+	});
+
 	var postsView = new PostsView();
 	var modalView = new ModalView();
-	var loadMore = new LoadMoreView();
+	var loadMoreView = new LoadMoreView();
+	var headerView = new HeaderView();
 })(jQuery);
