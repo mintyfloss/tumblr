@@ -5,7 +5,7 @@
 	var Post = Backbone.Model.extend({
 		defaults: {
 			id: '0',
-			url: '',
+			postUrl: '',
 			type: '',
 			notesUrl: '',
 			reblogKey: ''
@@ -89,7 +89,7 @@
 					$postElement = $(postElement),
 					post = new Post({
 						id: $postElement.attr('data-post-id'),
-						url: $postElement.attr('data-post-url'),
+						postUrl: $postElement.attr('data-post-url'),
 						type: $postElement.attr('data-post-type'),
 						notesUrl: $postElement.attr('data-post-notesurl'),
 						reblogKey: $postElement.attr('data-post-reblogurl').split($postElement.attr('data-post-id') + '/')[1]
@@ -117,7 +117,7 @@
 			'click .modalLink': function() { 
 				modalView.model.set({
 					id: this.model.get('id'),
-					url: this.model.get('url'),
+					postUrl: this.model.get('postUrl'),
 					type: this.model.get('type'),
 					notesUrl: this.model.get('notesUrl'),
 					isVisible: true,
@@ -129,7 +129,7 @@
 			'click .noteCount': function() {
 				modalView.model.set({
 					id: this.model.get('id'),
-					url: this.model.get('url'),
+					postUrl: this.model.get('postUrl'),
 					type: this.model.get('type'),
 					notesUrl: this.model.get('notesUrl'),
 					isVisible: true,
@@ -146,6 +146,33 @@
 			this.$el.find('.permalink').tooltip({
 				placement: 'bottom'
 			});
+
+			// Fixes problem when flash player doesn't load after going to new page
+			// Only happens with when going to new page with AJAX
+			if (this.model.get('type') == 'audio') {
+				// Tumblr renders the audio player with a div.audio_player. Check to see if that exists.
+				var hasAudioPlayer = !!this.$el.find('.audio_player').get(0);
+
+				if (!hasAudioPlayer){
+					var
+						serviceUrl = this.model.get('postUrl').split('.tumblr.com')[0] + '.tumblr.com/api/read/json',
+						$audioPlayer = this.$el.find('#audio_player_' + this.model.get('id'))
+					;
+
+					if ($audioPlayer.get(0))
+						$.ajax({
+							url: serviceUrl,
+							data: {
+								id: this.model.get('id')
+							},
+							dataType: 'jsonp',
+							success: function(data) {
+								var $newDiv = $('<div class="audio_player"></div>').append(data.posts[0]['audio-player']);
+								$audioPlayer.html($newDiv);
+							}
+						});
+				}
+			}
 		}
 	});
 
@@ -181,7 +208,7 @@
 			var viewModel = this.model;
 
 			// Makes request for post
-			$('.modalPost').load(viewModel.get('url') + ' article', function(data) {
+			$('.modalPost').load(viewModel.get('postUrl') + ' article', function(data) {
 
 				// Set title of modal to the date of the post
 				var $date = $(this).find('.date');
@@ -289,17 +316,17 @@
 		el: $('#header'),
 
 		initialize: function(){
-			var view = this;
+			var $icon = this.$el.find('.icon');
 
-			view.$el.find('.aboutMeDesc')
+			this.$el.find('.aboutMeDesc')
 				.collapse({toggle: false})
 				.on('hide', function() {
-					view.$el.find('.icon').removeClass('icon-chevron-up');
-					view.$el.find('.icon').addClass('icon-chevron-down');
+					$icon.removeClass('icon-chevron-up');
+					$icon.addClass('icon-chevron-down');
 				})
 				.on('show', function() {
-					view.$el.find('.icon').removeClass('icon-chevron-down');
-					view.$el.find('.icon').addClass('icon-chevron-up');
+					$icon.removeClass('icon-chevron-down');
+					$icon.addClass('icon-chevron-up');
 				});
 		}
 	});
