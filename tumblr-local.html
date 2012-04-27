@@ -100,15 +100,15 @@
 							{block:Photo}
 							<div class="postContent photo">
 								<figure>
+									{block:IndexPage}
 									<a class="modalLink" data-toggle="modal" data-postnotesurl="{PostNotesURL}" href="{Permalink}">
-										{block:IndexPage}
 										<i class="zoomInIcon icon-zoom-in icon-white"></i>
 										<img src="{PhotoURL-250}" alt="{PhotoAlt}"/>
-										{/block:IndexPage}
-										{block:PermalinkPage}
-										<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
-										{/block:PermalinkPage}
 									</a>
+									{/block:IndexPage}
+									{block:PermalinkPage}
+									<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+									{/block:PermalinkPage}
 									{block:Caption}<figcaption class="caption">{Caption}</figcaption>{/block:Caption}
 								</figure>
 							</div>

@@ -22,19 +22,18 @@
 				<header id="header">
 					<h1 id="logo"><a class="logoLink" href="/">{Title}</a></h1>
 					{block:Description}<div class="description">{Description}</div>{/block:Description}
-					<ul id="nav" class="nav nav-pills nav-stacked">
+					<ul id="nav" class="nav nav-stacked">
 						{block:HasPages}{block:Pages}<li><a href="{URL}">{Label}</a></li>{/block:Pages}{/block:HasPages}
-						<li><a href="/archive">{lang:Archive}</a></li>
-						<li><a href="/rss">{lang:RSS feed}</a></li>
-						<li>
-							<a class="aboutMeLink" data-toggle="collapse" data-target="#aboutMeDesc" href="javascript://">{lang:About me}</a>
-							<div id="aboutMeDesc" class="collapse">
+						<li class="archive"><a href="/archive">{lang:Archive}</a></li>
+						<li class="rss"><a href="/rss">{lang:RSS feed}</a></li>
+						{block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
+						<li class="aboutMe">
+							<a class="aboutMeLink" data-toggle="collapse" data-target=".aboutMeDesc" href="javascript://">{lang:About me}<i class="icon icon-chevron-down"></i></a>
+							<div class="aboutMeDesc collapse">
 								<h5>Mintyfied</h5>
-								<p>Still working on this theme. Almost done!</p>
+								<p>I created this to play around with making a Tumblr theme. I also post stuff that I find interesting.</p>
 							</div>
 						</li>
-
-						{block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
 					</ul>
 					<form id="search" class="form-search" action="/search" method="get">
 						<input type="text" class="search-query" placeholder="{lang:Search}" name="q" value="{SearchQuery}" />
@@ -50,7 +49,7 @@
 				<div class="posts clearfix">
 				{/block:IndexPage}
 					{block:Posts}
-					<div class="post" data-post-id="{PostID}" data-post-url="{Permalink}" data-post-type="{PostType}" data-post-notesurl="{PostNotesURL}">
+					<div class="post" data-post-id="{PostID}" data-post-url="{Permalink}" data-post-type="{PostType}" data-post-notesurl="{PostNotesURL}" data-post-reblogurl="{ReblogURL}">
 						<article class="{TagsAsClasses}">
 							{block:Date}
 							{block:NewDayDate}<h6 class="date">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</h6>{/block:NewDayDate}
@@ -101,15 +100,15 @@
 							{block:Photo}
 							<div class="postContent photo">
 								<figure>
+									{block:IndexPage}
 									<a class="modalLink" data-toggle="modal" data-postnotesurl="{PostNotesURL}" href="{Permalink}">
-										{block:IndexPage}
 										<i class="zoomInIcon icon-zoom-in icon-white"></i>
 										<img src="{PhotoURL-250}" alt="{PhotoAlt}"/>
-										{/block:IndexPage}
-										{block:PermalinkPage}
-										<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
-										{/block:PermalinkPage}
 									</a>
+									{/block:IndexPage}
+									{block:PermalinkPage}
+									<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+									{/block:PermalinkPage}
 									{block:Caption}<figcaption class="caption">{Caption}</figcaption>{/block:Caption}
 								</figure>
 							</div>
@@ -147,12 +146,9 @@
 							</div>
 							{/block:Answer}
 							{block:IndexPage}
-							<div class="indexPage">
-								<a class="permalink" href="{Permalink}">{lang:Permalink}</a>
-								<a class="noteCount" data-toggle="modal" data-postnotesurl="{PostNotesURL}" href="{Permalink}">
-									<i class="icon icon-heart"></i>{NoteCountWithLabel}
-									
-								</a>
+							<div class="icons">
+								<a class="permalink" href="{Permalink}" data-original-title="Like and reblog here">{lang:Permalink}</a>
+								<a class="noteCount" href="{Permalink}">{NoteCountWithLabel}</a>
 							</div>
 							{/block:IndexPage}
 						</article>
@@ -184,7 +180,9 @@
 					</ul>
 				</div>
 				<div class="loadMore" data-total-pages="{TotalPages}" data-page="{CurrentPage}">
-					<a class="btn btn-inverse load">{lang:Load more posts}</a>
+					{block:NextPage}
+					<a class="load" href="{NextPage}">{lang:Load more posts}</a>
+					{/block:NextPage}
 				</div>
 				{/block:Pagination}
 			</section><!--close content-->
@@ -206,6 +204,7 @@
 		</div>
 	</div>
 	<footer id="footer"></footer>
+	<iframe id="likeHack"></iframe>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://www.mintyfloss.com/tumblr/js/jquery.isotope.min.js"></script>
 	<script type="text/javascript" src="http://www.mintyfloss.com/tumblr/js/jquery.imagesloaded.min.js"></script>
