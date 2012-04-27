@@ -156,10 +156,13 @@
 				if (!hasAudioPlayer){
 					var
 						serviceUrl = this.model.get('postUrl').split('.tumblr.com')[0] + '.tumblr.com/api/read/json',
-						$audioPlayer = this.$el.find('#audio_player_' + this.model.get('id'))
+						$audioPlayer = this.$el.find('#audio_player_' + this.model.get('id')),
+						$loading = $('<div>Loading player...</div>').css({ padding: '4px 9px' })
 					;
 
-					if ($audioPlayer.get(0))
+					if ($audioPlayer.get(0)) {
+						$audioPlayer.html($loading);
+
 						$.ajax({
 							url: serviceUrl,
 							data: {
@@ -169,8 +172,12 @@
 							success: function(data) {
 								var $newDiv = $('<div class="audio_player"></div>').append(data.posts[0]['audio-player']);
 								$audioPlayer.html($newDiv);
+							},
+							error: function() {
+								$audioPlayer.html($loading.html('Unable to load player'));
 							}
 						});
+					}
 				}
 			}
 		}
