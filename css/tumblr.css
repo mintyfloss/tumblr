@@ -23,7 +23,8 @@ iframe#tumblr_controls {}
 		display:block;
 		text-indent:-5000px;
 		overflow:hidden;
-		background:url('../images/mintyfied_logo.png') 0 0 no-repeat transparent;
+		background:url('../images/mintyfied_logo.png') center center no-repeat transparent;
+		background-size:80px 80px
 	}
 	/* About me collapse widget */
 		.aboutMeLink {

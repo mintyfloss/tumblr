@@ -36,7 +36,7 @@
 						.attr({
 							width:this.$el.width(),
 							height:this.$el.height(),
-							class:'canvasBackground'
+							'class':'canvasBackground'
 						})
 						.css({
 							position:'absolute',
