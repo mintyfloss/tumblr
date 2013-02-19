@@ -1,8 +1,10 @@
 (function($){
+var MF = MF || {};
+
 // *****************
 //  MODELS
 // *****************
-	var Post = Backbone.Model.extend({
+	MF.Post = Backbone.Model.extend({
 		defaults: {
 			id: '0',
 			postUrl: '',
@@ -12,9 +14,9 @@
 		}
 	});
 
-	var ModalPost = Backbone.Model.extend({
+	MF.ModalPost = Backbone.Model.extend({
 		defaults: _.extend(
-			Post.prototype.defaults,
+			MF.Post.prototype.defaults,
 			{
 				isVisible: false,
 				scrollToNotes: false
@@ -22,7 +24,7 @@
 		)
 	});
 
-	var LoadMore = Backbone.Model.extend({
+	MF.LoadMore = Backbone.Model.extend({
 		defaults: {
 			totalPages: 0,
 			page: 1
@@ -32,20 +34,20 @@
 // *****************
 //  COLLECTIONS
 // *****************
-	var Posts = Backbone.Collection.extend({
-		model: Post
+	MF.Posts = Backbone.Collection.extend({
+		model: MF.Post
 	});
 
 // *****************
 //  VIEWS
 // *****************
-	var PostsView = Backbone.View.extend({
+	MF.PostsView = Backbone.View.extend({
 		el: $('.posts'),
 
 		initialize: function() {
 			_.bindAll(this, 'render', 'addPosts');
 
-			this.collection = new Posts();
+			this.collection = new MF.Posts();
 
 			var $posts = this.$el.find('.post');
 
@@ -87,7 +89,7 @@
 			_($posts).each(function(postElement){
 				var
 					$postElement = $(postElement),
-					post = new Post({
+					post = new MF.Post({
 						id: $postElement.attr('data-post-id'),
 						postUrl: $postElement.attr('data-post-url'),
 						type: $postElement.attr('data-post-type'),
@@ -98,7 +100,7 @@
 
 				_this.collection.add(post);
 
-				new PostView({
+				new MF.PostView({
 					el: $postElement,
 					model: post
 				});		
@@ -106,7 +108,7 @@
 		}
 	});
 
-	var PostView = Backbone.View.extend({
+	MF.PostView = Backbone.View.extend({
 		initialize: function(){
 			_.bindAll(this, 'render');
 
@@ -183,7 +185,7 @@
 		}
 	});
 
-	var ModalView = Backbone.View.extend({
+	MF.ModalView = Backbone.View.extend({
 		el: $('.modalScroll'),
 
 		initialize: function() {
@@ -191,7 +193,7 @@
 
 			view = this;
 
-			view.model = new ModalPost();
+			view.model = new MF.ModalPost();
 			view.model.on('change:isVisible', function() { 
 				if (view.model.get('isVisible'))
 					view.showModal(view.model.get('scrollToNotes'));
@@ -253,7 +255,7 @@
 		}
 	});
 
-	var LoadMoreView = Backbone.View.extend({
+	MF.LoadMoreView = Backbone.View.extend({
 		el: $('.loadMore'),
 		
 		initialize: function() {
@@ -263,7 +265,7 @@
 
 			view.$loadLink = view.$el.find('.load');
 
-			view.model = new LoadMore({
+			view.model = new MF.LoadMore({
 				page: view.$el.attr('data-page'),
 				totalPages: view.$el.attr('data-total-pages')
 			});
@@ -301,10 +303,16 @@
 				url: '/page/' + nextPage,
 				success: function(data) {
 					var $newPosts = $(data).find('.posts .post');
+
+					$newPosts.css('opacity', '0');
+
 					postsView.addPosts($newPosts, true);
 					postsView.render($newPosts, true, function() {
 						// sets new page
 						view.model.set({page: nextPage});
+
+						// sets opacity to show posts
+						$newPosts.css('opacity', '1');
 
 						// scrolls to new posts
 						$('html, body').animate({scrollTop: $newPosts.position().top}, 500, 'swing');
@@ -319,7 +327,7 @@
 		}
 	});
 
-	var HeaderView = Backbone.View.extend({
+	MF.HeaderView = Backbone.View.extend({
 		el: $('#header'),
 
 		initialize: function(){
@@ -338,8 +346,8 @@
 		}
 	});
 
-	var postsView = new PostsView();
-	var modalView = new ModalView();
-	var loadMoreView = new LoadMoreView();
-	var headerView = new HeaderView();
+	var postsView = new MF.PostsView();
+	var modalView = new MF.ModalView();
+	var loadMoreView = new MF.LoadMoreView();
+	var headerView = new MF.HeaderView();
 })(jQuery);
